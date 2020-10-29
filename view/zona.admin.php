@@ -40,6 +40,7 @@
 </style>
 <body>
   <?php
+    require_once '../controller/sessionController.php';
     require_once '../model/connexion.php';
     $query = "SELECT * FROM tbl_alumnos";
     $sentencia=$pdo->prepare($query);

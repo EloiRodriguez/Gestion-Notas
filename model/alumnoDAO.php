@@ -20,7 +20,7 @@
             $grupo=$alum->getGrupo();
             $email=$alum->getEmail();
             echo $email;
-            $psswd=$alum->getPasswd();
+            $psswd=md5($alum->getPasswd());
             echo $psswd;
 
             /**
@@ -80,12 +80,26 @@
 
         public function eliminarAlum($id){
             $this->pdo->beginTransaction();
-            $query="DELETE FROM `tbl_alumnos` WHERE `tbl_alumnos`.`id_alum` = ?;";
-            $id_alum=$id;
-            $sentencia=$this->pdo->prepare($query);
-            $sentencia->bindParam(1,$id_alum);
-            $sentencia->execute();
-            $this->pdo->commit();
+            try {
+                $id_alum=$id;
+
+                $query="DELETE FROM `tbl_alumnos` WHERE `id_alum` = ?;";
+                $sentencia=$this->pdo->prepare($query);
+                $sentencia->bindParam(1,$id_alum);
+                $sentencia->execute();
+
+                $query="DELETE FROM `tbl_notas` WHERE `tbl_notas`.`id_alum` = ?;";
+                $sentencia=$this->pdo->prepare($query);
+                $sentencia->bindParam(1,$id_alum);
+                $sentencia->execute();
+                
+                $this->pdo->commit();
+
+            } catch (PDOException $e) {
+                $this->pdo->rollBack();
+            }
+            
+            
         }
     }
 

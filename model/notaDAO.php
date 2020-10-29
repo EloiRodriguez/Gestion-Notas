@@ -100,18 +100,4 @@
 
         }
 
-        public function eliminarNota($id){
-            $this->pdo->beginTransaction();
-            /**
-             * Borrar nota Matematicas
-             */
-            $query="DELETE FROM `tbl_notas` WHERE `tbl_notas`.`id_alum` = ?;";
-            $id_alum=$id;
-            $sentencia=$this->pdo->prepare($query);
-            $sentencia->bindParam(1,$id_alum);
-            $sentencia->execute();
-
-            $this->pdo->commit();
-        }
-
     }

@@ -27,3 +27,4 @@ ALTER TABLE tbl_notas
 ADD CONSTRAINT FK_nota_alum FOREIGN KEY (id_alum)
 REFERENCES tbl_alumnos(id_alum);
 
+INSERT INTO `tbl_administrador` (`id_admin`, `email_admin`, `password_admin`) VALUES (NULL, 'eloirodriguez@fje.edu', '81dc9bdb52d04dc20036dbd8313ed055');
