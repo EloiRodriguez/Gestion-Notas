@@ -1,6 +1,6 @@
 <?php
     require_once 'persona.php';
-    class Nota extends Persona{
+    class Nota{
         private $asignatura;
         private $nota;
         private $id_alum;
